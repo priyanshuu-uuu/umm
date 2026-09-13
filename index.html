@@ -2,670 +2,1002 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For Ria 🌷</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>For Ria ♡</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500&display=swap');
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+:root{
+    --pink:#f8d9e3;
+    --pink2:#f3b9ca;
+    --rose:#c87f99;
+    --cream:#fff8fa;
+    --ink:#38252f;
+    --muted:#8c6877;
+    --glass:rgba(255,255,255,.36);
+    --line:rgba(255,255,255,.65);
+    --shadow:
+        0 25px 70px rgba(111,59,82,.15),
+        inset 0 1px 0 rgba(255,255,255,.85);
 }
 
-html {
-    scroll-behavior: smooth;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-body {
-    background: #070914;
-    color: #fff;
-    font-family: 'Montserrat', sans-serif;
-    overflow-x: hidden;
+html{
+    scroll-behavior:smooth;
 }
 
-/* =========================
-   BACKGROUND
-========================= */
-
-.stars {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 0;
-    overflow: hidden;
+body{
+    background:#f8e5eb;
+    color:var(--ink);
+    font-family:'DM Sans',sans-serif;
+    overflow-x:hidden;
 }
 
-.star {
-    position: absolute;
-    width: 2px;
-    height: 2px;
-    background: white;
-    border-radius: 50%;
-    opacity: .6;
-    animation: twinkle 3s infinite ease-in-out;
+body.locked{
+    overflow:hidden;
 }
 
-@keyframes twinkle {
-    0%,100% {
-        opacity: .2;
-        transform: scale(.7);
-    }
-    50% {
-        opacity: 1;
-        transform: scale(1.4);
-    }
-}
+/* =========================================================
+   LIQUID BACKGROUND
+========================================================= */
 
-/* =========================
-   ENTRY SCREEN
-========================= */
-
-#entry {
-    position: fixed;
-    inset: 0;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 25px;
+.liquid{
+    position:fixed;
+    inset:0;
+    z-index:-5;
+    overflow:hidden;
     background:
-        radial-gradient(circle at center, #151a36 0%, #080a16 55%, #03040a 100%);
-    transition: opacity 1.4s ease, visibility 1.4s ease;
+        radial-gradient(circle at 15% 20%,#ffdce7 0%,transparent 30%),
+        radial-gradient(circle at 85% 30%,#f6c8d7 0%,transparent 35%),
+        radial-gradient(circle at 50% 90%,#fff2f5 0%,transparent 38%),
+        #f8e7ec;
 }
 
-#entry.hide {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
+.blob{
+    position:absolute;
+    border-radius:48% 52% 65% 35% / 45% 35% 65% 55%;
+    filter:blur(2px);
+    opacity:.48;
+    animation:liquidMove 18s ease-in-out infinite alternate;
 }
 
-.entry-box {
-    width: min(500px, 100%);
-    animation: entryFloat 5s ease-in-out infinite;
+.blob.one{
+    width:42vw;
+    height:42vw;
+    background:rgba(255,255,255,.5);
+    left:-12vw;
+    top:12vh;
 }
 
-@keyframes entryFloat {
-    0%,100% {
-        transform: translateY(0);
+.blob.two{
+    width:35vw;
+    height:35vw;
+    background:rgba(238,172,196,.35);
+    right:-10vw;
+    top:45vh;
+    animation-delay:-6s;
+}
+
+.blob.three{
+    width:28vw;
+    height:28vw;
+    background:rgba(255,255,255,.55);
+    left:35vw;
+    bottom:-10vw;
+    animation-delay:-11s;
+}
+
+@keyframes liquidMove{
+    0%{
+        transform:translate3d(0,0,0) rotate(0deg) scale(1);
+        border-radius:48% 52% 65% 35% / 45% 35% 65% 55%;
     }
-    50% {
-        transform: translateY(-8px);
+    50%{
+        transform:translate3d(7vw,-5vh,0) rotate(30deg) scale(1.12);
+        border-radius:63% 37% 40% 60% / 35% 60% 40% 65%;
     }
-}
-
-.entry-small {
-    font-size: 11px;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: #aaaeca;
-    margin-bottom: 28px;
-}
-
-.entry-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(38px, 8vw, 64px);
-    line-height: 1.05;
-    font-weight: 400;
-    margin-bottom: 18px;
-}
-
-.entry-subtitle {
-    color: #b9bdd0;
-    font-size: 14px;
-    line-height: 1.8;
-    max-width: 400px;
-    margin: auto;
-}
-
-.frog {
-    font-size: 43px;
-    margin: 28px 0 18px;
-    display: inline-block;
-    animation: frogHop 2.8s ease-in-out infinite;
-}
-
-@keyframes frogHop {
-    0%,75%,100% {
-        transform: translateY(0) rotate(0);
-    }
-    80% {
-        transform: translateY(-13px) rotate(-4deg);
-    }
-    85% {
-        transform: translateY(0) rotate(4deg);
+    100%{
+        transform:translate3d(-4vw,7vh,0) rotate(65deg) scale(.95);
+        border-radius:35% 65% 55% 45% / 60% 40% 70% 30%;
     }
 }
 
-.hint {
-    font-size: 11px;
-    color: #777d98;
-    letter-spacing: 1px;
-    margin-bottom: 18px;
+/* =========================================================
+   NOISE
+========================================================= */
+
+.noise{
+    position:fixed;
+    inset:0;
+    z-index:9999;
+    pointer-events:none;
+    opacity:.025;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-.password-wrap {
-    display: flex;
-    gap: 9px;
-    justify-content: center;
+/* =========================================================
+   ENTRY
+========================================================= */
+
+#entry{
+    position:fixed;
+    inset:0;
+    z-index:500;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:25px;
+    background:
+        radial-gradient(circle at 50% 40%,#fff4f7 0%,#f5d5df 45%,#eab5c6 100%);
+    transition:
+        opacity 1.5s cubic-bezier(.65,0,.2,1),
+        visibility 1.5s;
 }
 
-#secretInput {
-    width: min(250px, 65vw);
-    padding: 14px 18px;
-    border: 1px solid rgba(255,255,255,.15);
-    border-radius: 30px;
-    outline: none;
-    background: rgba(255,255,255,.06);
-    color: white;
-    text-align: center;
-    font-family: inherit;
-    font-size: 14px;
-    transition: .3s;
+#entry.hide{
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
 }
 
-#secretInput:focus {
-    border-color: rgba(255,190,220,.65);
-    background: rgba(255,255,255,.09);
+.entry-card{
+    position:relative;
+    width:min(540px,100%);
+    padding:65px 35px 55px;
+    text-align:center;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.72),
+            rgba(255,255,255,.27)
+        );
+
+    border:1px solid rgba(255,255,255,.75);
+    border-radius:42px;
+
+    box-shadow:
+        35px 35px 80px rgba(126,67,90,.17),
+        -15px -15px 45px rgba(255,255,255,.8),
+        inset 0 1px 1px white;
+
+    backdrop-filter:blur(28px);
+    -webkit-backdrop-filter:blur(28px);
+
+    animation:cardFloat 6s ease-in-out infinite;
 }
 
-#enterBtn {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    border: 1px solid rgba(255,255,255,.18);
-    background: rgba(255,255,255,.07);
-    color: white;
-    cursor: pointer;
-    font-size: 18px;
-    transition: .3s;
+.entry-card:before{
+    content:"";
+    position:absolute;
+    inset:8px;
+    border-radius:36px;
+    border:1px solid rgba(255,255,255,.35);
+    pointer-events:none;
 }
 
-#enterBtn:hover {
-    transform: scale(1.08);
-    background: rgba(255,255,255,.13);
+@keyframes cardFloat{
+    0%,100%{transform:translateY(0) rotateX(0)}
+    50%{transform:translateY(-8px) rotateX(1deg)}
 }
 
-.error {
-    height: 25px;
-    margin-top: 12px;
-    color: #e8a8bd;
-    font-size: 12px;
-    opacity: 0;
-    transition: .3s;
+.entry-mini{
+    font-size:9px;
+    letter-spacing:5px;
+    text-transform:uppercase;
+    color:#a47989;
+    margin-bottom:28px;
 }
 
-.error.show {
-    opacity: 1;
+.entry-title{
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(45px,8vw,72px);
+    line-height:.88;
+    font-weight:400;
+    color:#553442;
 }
 
-.shake {
-    animation: shake .45s ease;
+.entry-description{
+    margin:28px auto 0;
+    max-width:390px;
+    font-size:13px;
+    line-height:1.9;
+    color:#876a76;
 }
 
-@keyframes shake {
-    0%,100% { transform: translateX(0); }
-    20% { transform: translateX(-8px); }
-    40% { transform: translateX(8px); }
-    60% { transform: translateX(-6px); }
-    80% { transform: translateX(6px); }
+.frog{
+    display:block;
+    font-size:43px;
+    margin:28px auto 8px;
+    width:max-content;
+    cursor:default;
+    animation:frog 3s ease-in-out infinite;
+    filter:drop-shadow(0 8px 8px rgba(100,50,70,.15));
 }
 
-/* =========================
+@keyframes frog{
+    0%,72%,100%{transform:translateY(0) rotate(0)}
+    78%{transform:translateY(-15px) rotate(-5deg)}
+    84%{transform:translateY(0) rotate(4deg)}
+}
+
+.hint{
+    font-family:'Cormorant Garamond',serif;
+    font-size:17px;
+    color:#9a7180;
+    margin-bottom:18px;
+}
+
+.password{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+}
+
+#secret{
+    width:min(270px,65vw);
+    height:52px;
+    border-radius:28px;
+    border:1px solid rgba(176,113,137,.2);
+    outline:none;
+    background:rgba(255,255,255,.45);
+    box-shadow:
+        inset 4px 4px 12px rgba(130,70,90,.06),
+        inset -4px -4px 12px rgba(255,255,255,.8);
+    text-align:center;
+    font:400 14px 'DM Sans',sans-serif;
+    color:#573846;
+    transition:.35s;
+}
+
+#secret:focus{
+    background:rgba(255,255,255,.72);
+    box-shadow:
+        0 0 0 4px rgba(236,159,184,.14),
+        inset 3px 3px 10px rgba(130,70,90,.05);
+}
+
+.enter{
+    width:52px;
+    height:52px;
+    border:0;
+    border-radius:50%;
+    cursor:pointer;
+    color:#fff;
+    background:linear-gradient(145deg,#e6a2b8,#c97f99);
+    box-shadow:
+        7px 8px 18px rgba(135,65,90,.22),
+        inset 2px 2px 5px rgba(255,255,255,.4);
+    transition:.3s;
+}
+
+.enter:hover{
+    transform:translateY(-3px) scale(1.04);
+}
+
+.error{
+    height:25px;
+    padding-top:10px;
+    font-size:11px;
+    color:#a45e76;
+    opacity:0;
+    transition:.3s;
+}
+
+.error.show{
+    opacity:1;
+}
+
+.shake{
+    animation:shake .45s ease;
+}
+
+@keyframes shake{
+    20%{transform:translateX(-8px)}
+    40%{transform:translateX(8px)}
+    60%{transform:translateX(-5px)}
+    80%{transform:translateX(5px)}
+}
+
+/* =========================================================
    MUSIC
-========================= */
+========================================================= */
 
-.music-control {
-    position: fixed;
-    right: 20px;
-    top: 20px;
-    z-index: 50;
-    width: 43px;
-    height: 43px;
-    border-radius: 50%;
-    border: 1px solid rgba(255,255,255,.15);
-    background: rgba(8,10,20,.55);
-    backdrop-filter: blur(10px);
-    color: white;
-    cursor: pointer;
-    opacity: 0;
-    transition: .5s;
+.music{
+    position:fixed;
+    z-index:300;
+    right:22px;
+    top:22px;
+    width:48px;
+    height:48px;
+    border-radius:50%;
+    border:1px solid rgba(255,255,255,.65);
+    background:rgba(255,255,255,.38);
+    backdrop-filter:blur(18px);
+    box-shadow:var(--shadow);
+    color:#74485a;
+    cursor:pointer;
+    opacity:0;
+    transform:translateY(-10px);
+    transition:.6s;
 }
 
-.music-control.visible {
-    opacity: 1;
+.music.show{
+    opacity:1;
+    transform:translateY(0);
 }
 
-/* =========================
-   GENERAL SECTIONS
-========================= */
+/* =========================================================
+   SECTIONS
+========================================================= */
 
-section {
-    position: relative;
-    min-height: 100vh;
-    z-index: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 90px 25px;
+section{
+    min-height:100vh;
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:110px 25px;
 }
 
-.content {
-    width: min(850px, 100%);
-    text-align: center;
+.content{
+    width:min(900px,100%);
+    text-align:center;
 }
 
-.eyebrow {
-    font-size: 10px;
-    letter-spacing: 5px;
-    text-transform: uppercase;
-    color: #969bb6;
-    margin-bottom: 25px;
+.kicker{
+    font-size:9px;
+    letter-spacing:6px;
+    text-transform:uppercase;
+    color:#a16f81;
+    margin-bottom:24px;
 }
 
-h1, h2 {
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 400;
+h1,h2{
+    font-family:'Cormorant Garamond',serif;
+    font-weight:400;
 }
 
-h1 {
-    font-size: clamp(50px, 10vw, 95px);
-    line-height: .95;
+h1{
+    font-size:clamp(64px,12vw,125px);
+    line-height:.78;
 }
 
-h2 {
-    font-size: clamp(42px, 7vw, 72px);
-    line-height: 1;
+h2{
+    font-size:clamp(48px,8vw,88px);
+    line-height:.9;
 }
 
-p {
-    font-size: clamp(14px, 2vw, 17px);
-    line-height: 2;
-    color: #c4c6d4;
+p{
+    font-size:clamp(14px,2vw,17px);
+    line-height:2;
+    color:#735563;
 }
 
-.fade-text {
-    opacity: 0;
-    transform: translateY(25px);
-    transition: 1.2s ease;
+.spacer{
+    height:30px;
 }
 
-.fade-text.show {
-    opacity: 1;
-    transform: translateY(0);
+.reveal{
+    opacity:0;
+    transform:translateY(35px);
+    transition:
+        opacity 1.3s cubic-bezier(.2,.7,.2,1),
+        transform 1.3s cubic-bezier(.2,.7,.2,1);
 }
 
-.space {
-    height: 28px;
+.reveal.visible{
+    opacity:1;
+    transform:translateY(0);
 }
 
-/* =========================
-   SECTION 1
-========================= */
+/* =========================================================
+   GLASS POEM
+========================================================= */
 
-#beginning {
-    background:
-        radial-gradient(circle at 50% 40%, rgba(83,78,143,.25), transparent 45%);
+.poem{
+    width:min(690px,100%);
+    margin:45px auto 0;
+    padding:38px;
+    border-radius:34px;
+    background:rgba(255,255,255,.27);
+    border:1px solid rgba(255,255,255,.55);
+    backdrop-filter:blur(20px);
+    box-shadow:
+        20px 25px 60px rgba(120,63,84,.09),
+        inset 1px 1px 0 rgba(255,255,255,.8);
 }
 
-/* =========================
+.poem p{
+    font-family:'Cormorant Garamond',serif;
+    font-size:25px;
+    line-height:1.45;
+    color:#694655;
+}
+
+/* =========================================================
    APOLOGY
-========================= */
+========================================================= */
 
-#apology {
+#apology{
     background:
-        radial-gradient(circle at 30% 50%, rgba(115,67,93,.18), transparent 45%);
+        radial-gradient(circle at 50% 30%,rgba(255,255,255,.55),transparent 40%);
 }
 
-.apology-heart {
-    font-size: 65px;
-    margin-bottom: 30px;
-    filter: drop-shadow(0 0 20px rgba(255,150,190,.25));
+.withered{
+    font-size:62px;
+    margin-bottom:20px;
+    filter:drop-shadow(0 10px 12px rgba(100,50,70,.12));
 }
 
-/* =========================
+/* =========================================================
    SPARK
-========================= */
+========================================================= */
 
-#spark {
+.spark-orb{
+    width:120px;
+    height:120px;
+    border-radius:50%;
+    margin:0 auto 40px;
+
     background:
-        radial-gradient(circle at 50% 50%, rgba(123,91,143,.2), transparent 50%);
+        radial-gradient(circle at 35% 30%,#fff,#ffdbe5 35%,#eaa3bb 75%);
+
+    box-shadow:
+        0 0 70px rgba(228,132,163,.35),
+        inset 8px 8px 18px rgba(255,255,255,.8),
+        inset -12px -15px 25px rgba(175,77,111,.12);
+
+    animation:orb 4s ease-in-out infinite;
 }
 
-.flower {
-    font-size: 50px;
-    margin-bottom: 25px;
-    animation: flowerFloat 4s ease-in-out infinite;
+@keyframes orb{
+    0%,100%{transform:scale(1)}
+    50%{transform:scale(1.07);box-shadow:0 0 100px rgba(228,132,163,.48)}
 }
 
-@keyframes flowerFloat {
-    0%,100% {
-        transform: translateY(0) rotate(-3deg);
-    }
-    50% {
-        transform: translateY(-10px) rotate(3deg);
-    }
+/* =========================================================
+   CONSTELLATION
+========================================================= */
+
+.constellation-section{
+    min-height:115vh;
 }
 
-/* =========================
+.constellation-wrap{
+    position:relative;
+    width:min(700px,95vw);
+    height:520px;
+    margin:55px auto 35px;
+    border-radius:45px;
+
+    background:
+        radial-gradient(circle at 50% 45%,rgba(255,255,255,.72),rgba(250,220,229,.34));
+
+    border:1px solid rgba(255,255,255,.7);
+
+    backdrop-filter:blur(25px);
+
+    box-shadow:
+        30px 35px 80px rgba(120,64,85,.13),
+        inset 1px 1px 0 white;
+
+    overflow:hidden;
+}
+
+.constellation-wrap canvas{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+}
+
+.constellation-label{
+    position:absolute;
+    bottom:24px;
+    left:0;
+    right:0;
+    text-align:center;
+    font-family:'Cormorant Garamond',serif;
+    font-size:25px;
+    color:#825567;
+}
+
+.constellation-number{
+    position:absolute;
+    top:22px;
+    left:25px;
+    font-size:9px;
+    letter-spacing:4px;
+    color:#a87888;
+}
+
+.constellation-poem{
+    max-width:680px;
+    margin:auto;
+    font-family:'Cormorant Garamond',serif;
+    font-size:24px;
+    line-height:1.55;
+    color:#694655;
+}
+
+/* =========================================================
    CARDS
-========================= */
+========================================================= */
 
-.cards {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-    margin-top: 45px;
+.cards{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+    margin-top:50px;
 }
 
-.card {
-    min-height: 180px;
-    padding: 28px;
-    border-radius: 22px;
-    border: 1px solid rgba(255,255,255,.08);
-    background: rgba(255,255,255,.035);
-    backdrop-filter: blur(12px);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    transition: .5s ease;
-    cursor: pointer;
+.glass-card{
+    min-height:190px;
+    padding:35px 25px;
+    border-radius:32px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.5),
+            rgba(255,255,255,.19)
+        );
+
+    border:1px solid rgba(255,255,255,.62);
+
+    backdrop-filter:blur(20px);
+
+    box-shadow:
+        18px 22px 50px rgba(120,64,85,.09),
+        inset 2px 2px 0 rgba(255,255,255,.7);
+
+    transition:
+        transform .6s cubic-bezier(.2,.8,.2,1),
+        box-shadow .6s;
 }
 
-.card:hover {
-    transform: translateY(-7px);
-    background: rgba(255,255,255,.065);
-    border-color: rgba(255,255,255,.16);
+.glass-card:hover{
+    transform:
+        translateY(-12px)
+        rotateX(3deg)
+        rotateY(-3deg);
+
+    box-shadow:
+        25px 35px 65px rgba(120,64,85,.15),
+        inset 2px 2px 0 white;
 }
 
-.card-icon {
-    font-size: 30px;
-    margin-bottom: 15px;
+.card-icon{
+    font-size:34px;
+    margin-bottom:15px;
 }
 
-.card h3 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 25px;
-    font-weight: 500;
-    margin-bottom: 8px;
+.glass-card h3{
+    font-family:'Cormorant Garamond',serif;
+    font-size:29px;
+    font-weight:500;
+    margin-bottom:8px;
 }
 
-.card p {
-    font-size: 12px;
-    line-height: 1.7;
+.glass-card p{
+    font-size:12px;
 }
 
-/* =========================
+/* =========================================================
    LETTERS
-========================= */
+========================================================= */
 
-#letters {
+.letters{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:18px;
+    margin-top:50px;
+}
+
+.envelope{
+    width:155px;
+    height:125px;
+    border-radius:27px;
+    cursor:pointer;
+
     background:
-        radial-gradient(circle at 70% 40%, rgba(102,76,137,.18), transparent 45%);
+        linear-gradient(145deg,rgba(255,255,255,.57),rgba(255,255,255,.2));
+
+    border:1px solid rgba(255,255,255,.7);
+
+    backdrop-filter:blur(18px);
+
+    box-shadow:
+        15px 18px 40px rgba(120,64,85,.11),
+        inset 2px 2px 0 rgba(255,255,255,.85);
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:37px;
+
+    transition:.5s cubic-bezier(.2,.8,.2,1);
 }
 
-.letters {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 18px;
-    margin-top: 45px;
+.envelope:hover{
+    transform:translateY(-12px) rotate(-3deg) scale(1.04);
 }
 
-.envelope {
-    width: 150px;
-    height: 115px;
-    border-radius: 15px;
-    border: 1px solid rgba(255,255,255,.1);
-    background: rgba(255,255,255,.04);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 32px;
-    transition: .5s;
+/* =========================================================
+   POPUP
+========================================================= */
+
+.popup{
+    position:fixed;
+    inset:0;
+    z-index:800;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:25px;
+
+    background:rgba(87,47,62,.22);
+    backdrop-filter:blur(18px);
+
+    opacity:0;
+    visibility:hidden;
+    transition:.5s;
 }
 
-.envelope:hover {
-    transform: translateY(-8px) rotate(-2deg);
-    background: rgba(255,255,255,.08);
+.popup.active{
+    opacity:1;
+    visibility:visible;
 }
 
-.letter-popup {
-    position: fixed;
-    inset: 0;
-    z-index: 90;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 25px;
-    background: rgba(2,3,10,.82);
-    backdrop-filter: blur(12px);
-    opacity: 0;
-    visibility: hidden;
-    transition: .4s;
-}
+.popup-box{
+    width:min(560px,100%);
+    padding:55px 35px;
+    border-radius:38px;
 
-.letter-popup.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-.letter-box {
-    width: min(520px, 100%);
-    padding: 45px 30px;
-    border-radius: 25px;
-    background: #111426;
-    border: 1px solid rgba(255,255,255,.1);
-    text-align: center;
-    transform: scale(.9);
-    transition: .4s;
-}
-
-.letter-popup.active .letter-box {
-    transform: scale(1);
-}
-
-.letter-box p {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 25px;
-    color: #ddddec;
-}
-
-.close-letter {
-    margin-top: 25px;
-    padding: 10px 20px;
-    border-radius: 20px;
-    border: 1px solid rgba(255,255,255,.15);
-    background: transparent;
-    color: #bbbfd2;
-    cursor: pointer;
-}
-
-/* =========================
-   UNIVERSE
-========================= */
-
-#universe {
     background:
-        radial-gradient(circle at center, rgba(46,54,105,.25), transparent 50%);
+        linear-gradient(145deg,rgba(255,255,255,.8),rgba(255,239,244,.55));
+
+    border:1px solid rgba(255,255,255,.85);
+
+    box-shadow:
+        25px 30px 70px rgba(90,45,62,.18),
+        inset 2px 2px 0 white;
+
+    transform:scale(.86) translateY(20px);
+    transition:.6s cubic-bezier(.2,.8,.2,1);
 }
 
-.constellation {
-    position: relative;
-    width: 280px;
-    height: 280px;
-    margin: 45px auto;
+.popup.active .popup-box{
+    transform:scale(1) translateY(0);
 }
 
-.constellation .cstar {
-    position: absolute;
-    width: 5px;
-    height: 5px;
-    background: white;
-    border-radius: 50%;
-    box-shadow: 0 0 15px white;
-    animation: cTwinkle 2.5s infinite alternate;
+.popup-box p{
+    font-family:'Cormorant Garamond',serif;
+    font-size:27px;
+    line-height:1.5;
 }
 
-@keyframes cTwinkle {
-    from { opacity: .3; transform: scale(.7); }
-    to { opacity: 1; transform: scale(1.5); }
+.close{
+    margin-top:28px;
+    border:0;
+    border-radius:25px;
+    padding:11px 24px;
+    background:#e8afc1;
+    color:white;
+    cursor:pointer;
 }
 
-.c1 { left: 25%; top: 20%; }
-.c2 { left: 48%; top: 10%; }
-.c3 { left: 70%; top: 30%; }
-.c4 { left: 58%; top: 55%; }
-.c5 { left: 32%; top: 70%; }
-.c6 { left: 12%; top: 48%; }
+/* =========================================================
+   GAME AREA
+========================================================= */
 
-.constellation svg {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    opacity: .2;
+.game-section{
+    min-height:100vh;
 }
 
-/* =========================
-   FORGIVENESS
-========================= */
+.game{
+    position:relative;
+    width:min(760px,95vw);
+    height:500px;
+    margin:45px auto 20px;
 
-#forgive {
+    overflow:hidden;
+
+    border-radius:42px;
+
     background:
-        radial-gradient(circle at center, rgba(121,83,105,.18), transparent 50%);
+        linear-gradient(
+            180deg,
+            rgba(255,247,250,.65),
+            rgba(247,210,222,.35)
+        );
+
+    border:1px solid rgba(255,255,255,.75);
+
+    box-shadow:
+        30px 35px 80px rgba(116,58,80,.15),
+        inset 2px 2px 0 white;
+
+    backdrop-filter:blur(25px);
+
+    touch-action:none;
 }
 
-.highlight {
-    color: #f0b8ce;
+.game-title{
+    position:absolute;
+    z-index:5;
+    top:22px;
+    left:0;
+    right:0;
+    text-align:center;
+    font-family:'Cormorant Garamond',serif;
+    font-size:27px;
+    color:#815266;
 }
 
-/* =========================
-   SUNRISE
-========================= */
+.score{
+    position:absolute;
+    z-index:6;
+    top:25px;
+    right:28px;
+    font-size:11px;
+    color:#a06f80;
+}
 
-#sunrise {
+/* =========================================================
+   PETAL GAME
+========================================================= */
+
+.petal{
+    position:absolute;
+    font-size:27px;
+    cursor:pointer;
+    user-select:none;
+    animation:fall linear forwards;
+    filter:drop-shadow(0 7px 7px rgba(100,50,70,.13));
+}
+
+@keyframes fall{
+    from{
+        transform:translateY(-60px) rotate(0deg);
+    }
+    to{
+        transform:translateY(570px) rotate(400deg);
+    }
+}
+
+.game-hint{
+    color:#96707e;
+    font-size:12px;
+    margin-top:15px;
+}
+
+/* =========================================================
+   HEART GAME
+========================================================= */
+
+.heart-player{
+    position:absolute;
+    bottom:35px;
+    left:50%;
+    transform:translateX(-50%);
+    font-size:48px;
+    cursor:pointer;
+    user-select:none;
+    filter:drop-shadow(0 12px 10px rgba(150,70,95,.18));
+}
+
+.falling-star{
+    position:absolute;
+    top:-40px;
+    font-size:24px;
+    animation:starFall linear forwards;
+}
+
+@keyframes starFall{
+    to{
+        transform:translateY(550px) rotate(360deg);
+    }
+}
+
+/* =========================================================
+   GARDEN
+========================================================= */
+
+.garden{
+    position:relative;
+    width:min(760px,95vw);
+    height:470px;
+    margin:45px auto;
+    border-radius:45px;
+    overflow:hidden;
+
     background:
         linear-gradient(
             to bottom,
-            #080a17 0%,
-            #17152a 35%,
-            #463247 65%,
-            #9c6372 100%
+            #f7dce5 0%,
+            #f9e7ec 53%,
+            #d9b4a7 54%,
+            #bc8e81 100%
         );
-    overflow: hidden;
+
+    border:1px solid rgba(255,255,255,.75);
+
+    box-shadow:
+        30px 35px 80px rgba(116,58,80,.14),
+        inset 0 2px 0 white;
 }
 
-.sun {
-    width: 130px;
-    height: 130px;
-    border-radius: 50%;
-    background: radial-gradient(circle, #ffe8c7, #e7a69c);
-    box-shadow: 0 0 70px rgba(255,194,157,.35);
-    margin: 0 auto 50px;
-    opacity: .8;
+.moon{
+    position:absolute;
+    width:90px;
+    height:90px;
+    border-radius:50%;
+    right:12%;
+    top:15%;
+
+    background:#fff8f2;
+
+    box-shadow:
+        0 0 70px rgba(255,255,255,.8),
+        inset -10px -5px 15px rgba(220,180,190,.2);
 }
 
-/* =========================
+.seed{
+    position:absolute;
+    bottom:30px;
+    left:50%;
+    transform:translateX(-50%);
+    font-size:34px;
+    cursor:pointer;
+    transition:.4s;
+}
+
+.grown{
+    position:absolute;
+    bottom:25px;
+    font-size:50px;
+    animation:bloom .8s cubic-bezier(.2,.8,.2,1);
+}
+
+@keyframes bloom{
+    0%{
+        transform:scale(0) translateY(20px);
+        opacity:0;
+    }
+    70%{
+        transform:scale(1.15);
+    }
+    100%{
+        transform:scale(1);
+        opacity:1;
+    }
+}
+
+/* =========================================================
    FINAL
-========================= */
+========================================================= */
 
-#final {
-    min-height: 100vh;
+.final{
+    min-height:120vh;
     background:
-        radial-gradient(circle at center, rgba(178,105,130,.22), transparent 50%),
-        #17101b;
+        radial-gradient(circle at 50% 30%,rgba(255,255,255,.65),transparent 30%);
 }
 
-.final-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(70px, 15vw, 150px);
-    color: #f2c5d5;
+.final-name{
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(90px,18vw,180px);
+    line-height:.7;
+    color:#c57f97;
+    text-shadow:
+        10px 15px 30px rgba(120,60,80,.12);
 }
 
-.final-heart {
-    font-size: 25px;
-    margin: 20px;
+.final-poem{
+    max-width:650px;
+    margin:55px auto;
 }
 
-.final-line {
-    max-width: 650px;
-    margin: 20px auto;
+.final-poem p{
+    font-family:'Cormorant Garamond',serif;
+    font-size:27px;
+    line-height:1.5;
 }
 
-.signature {
-    margin-top: 45px;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 25px;
-    color: #e3b9c8;
+.signature{
+    margin-top:50px;
+    font-family:'Cormorant Garamond',serif;
+    font-size:27px;
+    color:#a7677f;
 }
 
-/* =========================
+/* =========================================================
    MOBILE
-========================= */
+========================================================= */
 
-@media (max-width: 600px) {
+@media(max-width:650px){
 
-    section {
-        padding: 80px 20px;
+    section{
+        padding:90px 18px;
     }
 
-    .cards {
-        grid-template-columns: 1fr;
+    .entry-card{
+        padding:55px 22px 45px;
+        border-radius:34px;
     }
 
-    .card {
-        min-height: 150px;
+    .cards{
+        grid-template-columns:1fr;
     }
 
-    .letters {
-        gap: 10px;
+    .poem{
+        padding:28px 20px;
     }
 
-    .envelope {
-        width: 135px;
-        height: 100px;
+    .poem p{
+        font-size:21px;
     }
 
-    .password-wrap {
-        align-items: center;
+    .constellation-wrap{
+        height:420px;
+        border-radius:32px;
+    }
+
+    .constellation-poem{
+        font-size:21px;
+    }
+
+    .game{
+        height:440px;
+        border-radius:30px;
+    }
+
+    .garden{
+        height:410px;
+        border-radius:30px;
+    }
+
+    .envelope{
+        width:140px;
+        height:110px;
     }
 }
 </style>
 </head>
 
-<body>
+<body class="locked">
 
-<!-- =========================
-     AUDIO
-========================= -->
+<div class="liquid">
+    <div class="blob one"></div>
+    <div class="blob two"></div>
+    <div class="blob three"></div>
+</div>
 
-<audio id="song" src="song.mp3" preload="auto" loop></audio>
+<div class="noise"></div>
 
-<button class="music-control" id="musicBtn" aria-label="Music">
-    🎵
-</button>
+<audio id="song" src="song.mp3" loop preload="auto"></audio>
 
-<!-- =========================
-     STARS
-========================= -->
+<button class="music" id="music">🎵</button>
 
-<div class="stars" id="stars"></div>
-
-<!-- =========================
+<!-- ========================================================
      SECRET ENTRY
-========================= -->
+========================================================= -->
 
 <div id="entry">
 
-    <div class="entry-box" id="entryBox">
+    <div class="entry-card" id="entryCard">
 
-        <div class="entry-small">
-            A little question before we begin
+        <div class="entry-mini">
+            PRIVATE LITTLE UNIVERSE
         </div>
 
         <div class="entry-title">
@@ -673,10 +1005,11 @@ p {
             you're really the one.
         </div>
 
-        <div class="entry-subtitle">
-            This little world wasn't made for everyone.
-            So before I let you in...
-        </div>
+        <p class="entry-description">
+            This place wasn't made for everyone.
+            There is a very small secret standing between
+            you and the things that were never said properly.
+        </p>
 
         <div class="frog">🐸</div>
 
@@ -684,882 +1017,1361 @@ p {
             A little hint should be enough.
         </div>
 
-        <div class="password-wrap">
+        <div class="password">
 
             <input
+                id="secret"
                 type="text"
-                id="secretInput"
                 placeholder="enter the secret"
                 autocomplete="off"
                 spellcheck="false"
             >
 
-            <button id="enterBtn">↗</button>
+            <button class="enter" id="enter">
+                ♡
+            </button>
 
         </div>
 
         <div class="error" id="error">
-            Hmm... that doesn't sound like you. 🐸
+            Hmm... the frog disagrees. 🐸
         </div>
 
     </div>
 
 </div>
 
-<!-- =========================
-     BEGINNING
-========================= -->
 
-<section id="beginning">
-
-    <div class="content">
-
-        <div class="eyebrow fade-text">
-            You made it here
-        </div>
-
-        <h1 class="fade-text">
-            Once upon<br>
-            a time...
-        </h1>
-
-        <div class="space"></div>
-
-        <p class="fade-text">
-            There was a girl who laughed a little louder,
-            smiled a little brighter,
-            and somehow made ordinary days feel less ordinary.
-        </p>
-
-        <div class="space"></div>
-
-        <p class="fade-text">
-            And there was someone who was lucky enough to know her.
-        </p>
-
-        <div class="space"></div>
-
-        <p class="fade-text">
-            Unfortunately, he was also stupid enough to leave her alone
-            when she needed him to stay.
-        </p>
-
-    </div>
-
-</section>
-
-<!-- =========================
-     APOLOGY
-========================= -->
-
-<section id="apology">
-
-    <div class="content">
-
-        <div class="apology-heart fade-text">
-            🥀
-        </div>
-
-        <div class="eyebrow fade-text">
-            The part I cannot rewrite
-        </div>
-
-        <h2 class="fade-text">
-            I could write<br>
-            a thousand apologies.
-        </h2>
-
-        <div class="space"></div>
-
-        <p class="fade-text">
-            I could decorate them with flowers, stars,
-            poems and pretty words.
-        </p>
-
-        <div class="space"></div>
-
-        <p class="fade-text">
-            But none of those words can return the days
-            when you needed someone and found an empty space instead.
-        </p>
-
-        <div class="space"></div>
-
-        <p class="fade-text">
-            So this isn't an apology asking you to forget.
-        </p>
-
-        <p class="fade-text">
-            It's an apology admitting that I remember.
-        </p>
-
-        <div class="space"></div>
-
-        <p class="fade-text">
-            I remember the distance.<br>
-            I remember the silence.<br>
-            I remember the person I became when you needed me to stay.
-        </p>
-
-        <div class="space"></div>
-
-        <h2 class="fade-text">
-            I'm sorry, Ria.
-        </h2>
-
-    </div>
-
-</section>
-
-<!-- =========================
-     SPARK
-========================= -->
-
-<section id="spark">
-
-    <div class="content">
-
-        <div class="flower fade-text">
-            🌷
-        </div>
-
-        <div class="eyebrow fade-text">
-            Something I hope you remember
-        </div>
-
-        <h2 class="fade-text">
-            Maybe the spark<br>
-            didn't disappear.
-        </h2>
-
-        <div class="space"></div>
-
-        <p class="fade-text">
-            Maybe it simply got tired of shining for a world
-            that kept asking it to burn.
-        </p>
-
-        <div class="space"></div>
-
-        <p class="fade-text">
-            And maybe...
-        </p>
-
-        <p class="fade-text">
-            it deserves somewhere safe to glow again.
-        </p>
-
-        <div class="space"></div>
-
-        <h2 class="fade-text">
-            Ria.
-        </h2>
-
-        <div class="space"></div>
-
-        <p class="fade-text">
-            You don't have to become the old you for me.
-        </p>
-
-        <p class="fade-text">
-            You don't have to smile when you're sad.
-        </p>
-
-        <p class="fade-text">
-            You don't have to forgive me today.
-        </p>
-
-        <p class="fade-text">
-            You don't even have to forgive me at all.
-        </p>
-
-        <div class="space"></div>
-
-        <p class="fade-text">
-            I just want you to know that your softness
-            was never the problem.
-        </p>
-
-    </div>
-
-</section>
-
-<!-- =========================
-     THINGS I NOTICE
-========================= -->
+<!-- ========================================================
+     OPENING
+========================================================= -->
 
 <section>
 
-    <div class="content">
+<div class="content">
 
-        <div class="eyebrow fade-text">
-            Things I still notice
-        </div>
+    <div class="kicker reveal">
+        somewhere between memory and moonlight
+    </div>
 
-        <h2 class="fade-text">
-            The little things.
-        </h2>
+    <h1 class="reveal">
+        Once upon<br>
+        a time...
+    </h1>
 
-        <p class="fade-text">
-            The things you probably don't even notice about yourself.
+    <div class="spacer"></div>
+
+    <p class="reveal">
+        There was a girl who laughed a little louder,
+        smiled a little brighter,
+        and somehow made ordinary days feel less ordinary.
+    </p>
+
+    <div class="spacer"></div>
+
+    <p class="reveal">
+        And there was someone lucky enough to know her.
+    </p>
+
+    <div class="poem reveal">
+
+        <p>
+            Somewhere, a moon kept losing pieces of itself
+            and calling it a phase.
+            Somewhere, a fool mistook distance for escape,
+            then discovered that apparently
+            running away does not uninstall attachment.
+            Tragic software design.
         </p>
-
-        <div class="cards">
-
-            <div class="card fade-text">
-                <div class="card-icon">🌷</div>
-                <h3>Your little habits</h3>
-                <p>
-                    Tiny things that somehow became unforgettable.
-                </p>
-            </div>
-
-            <div class="card fade-text">
-                <div class="card-icon">🎨</div>
-                <h3>Your art</h3>
-                <p>
-                    You create little pieces of yourself
-                    and somehow make them beautiful.
-                </p>
-            </div>
-
-            <div class="card fade-text">
-                <div class="card-icon">🎶</div>
-                <h3>Your voice</h3>
-                <p>
-                    Some sounds aren't meant to be explained.
-                    They're meant to be kept.
-                </p>
-            </div>
-
-            <div class="card fade-text">
-                <div class="card-icon">🌙</div>
-                <h3>Your existence</h3>
-                <p>
-                    Yes, this one is ridiculously cheesy.
-                    Sue me.
-                </p>
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-<!-- =========================
-     LETTERS
-========================= -->
-
-<section id="letters">
-
-    <div class="content">
-
-        <div class="eyebrow fade-text">
-            Things never said properly
-        </div>
-
-        <h2 class="fade-text">
-            Open one.
-        </h2>
-
-        <div class="letters">
-
-            <div class="envelope fade-text" data-letter="missed">
-                💌
-            </div>
-
-            <div class="envelope fade-text" data-letter="scared">
-                ✉️
-            </div>
-
-            <div class="envelope fade-text" data-letter="regret">
-                💌
-            </div>
-
-            <div class="envelope fade-text" data-letter="care">
-                ✉️
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-<!-- =========================
-     LETTER POPUP
-========================= -->
-
-<div class="letter-popup" id="letterPopup">
-
-    <div class="letter-box">
-
-        <p id="letterText"></p>
-
-        <button class="close-letter" id="closeLetter">
-            close
-        </button>
 
     </div>
 
 </div>
 
-<!-- =========================
-     UNIVERSE
-========================= -->
+</section>
 
-<section id="universe">
 
-    <div class="content">
+<!-- ========================================================
+     APOLOGY
+========================================================= -->
 
-        <div class="eyebrow fade-text">
-            Somewhere beyond this one
-        </div>
+<section id="apology">
 
-        <h2 class="fade-text">
-            A thousand universes.
-        </h2>
+<div class="content">
 
-        <div class="constellation fade-text">
+    <div class="withered reveal">
+        🥀
+    </div>
 
-            <svg viewBox="0 0 280 280">
-                <line x1="70" y1="56" x2="134" y2="28"
-                    stroke="white" stroke-width="1"/>
-                <line x1="134" y1="28" x2="196" y2="84"
-                    stroke="white" stroke-width="1"/>
-                <line x1="196" y1="84" x2="162" y2="154"
-                    stroke="white" stroke-width="1"/>
-                <line x1="162" y1="154" x2="90" y2="196"
-                    stroke="white" stroke-width="1"/>
-                <line x1="90" y1="196" x2="34" y2="134"
-                    stroke="white" stroke-width="1"/>
-                <line x1="34" y1="134" x2="70" y2="56"
-                    stroke="white" stroke-width="1"/>
-            </svg>
+    <div class="kicker reveal">
+        the part that cannot be edited
+    </div>
 
-            <div class="cstar c1"></div>
-            <div class="cstar c2"></div>
-            <div class="cstar c3"></div>
-            <div class="cstar c4"></div>
-            <div class="cstar c5"></div>
-            <div class="cstar c6"></div>
+    <h2 class="reveal">
+        I remember.
+    </h2>
 
-        </div>
+    <div class="poem reveal">
 
-        <p class="fade-text">
-            If there were a thousand universes...
-        </p>
+        <p>
+            I could polish an apology until it reflected the moon,
+            tie it with roses,
+            teach it beautiful words,
+            and send it wearing its best clothes.
 
-        <div class="space"></div>
+            But the past is a rude little creature.
+            It refuses presents.
 
-        <p class="fade-text">
-            In one, maybe I never left.
-        </p>
+            So here is the uglier version:
 
-        <p class="fade-text">
-            In another, maybe I knew how to stay.
-        </p>
+            you needed someone,
+            and I became absence.
 
-        <p class="fade-text">
-            In another, maybe we never became strangers.
-        </p>
-
-        <div class="space"></div>
-
-        <p class="fade-text">
-            And in this one...
-        </p>
-
-        <div class="space"></div>
-
-        <h2 class="fade-text">
-            I'm still here.
-        </h2>
-
-        <div class="space"></div>
-
-        <p class="fade-text">
-            Not to rewrite what happened.
-        </p>
-
-        <p class="fade-text">
-            Just to write something better from here.
+            Congratulations to me.
+            Even gravity knows how to stay.
         </p>
 
     </div>
 
+    <div class="spacer"></div>
+
+    <p class="reveal">
+        I'm sorry, Ria.
+    </p>
+
+</div>
+
 </section>
 
-<!-- =========================
-     FORGIVENESS
-========================= -->
 
-<section id="forgive">
+<!-- ========================================================
+     SPARK
+========================================================= -->
 
-    <div class="content">
+<section>
 
-        <div class="eyebrow fade-text">
-            You don't owe me anything
-        </div>
+<div class="content">
 
-        <h2 class="fade-text">
-            Especially forgiveness.
-        </h2>
+    <div class="spark-orb reveal"></div>
 
-        <div class="space"></div>
+    <div class="kicker reveal">
+        perhaps nothing was ever lost
+    </div>
 
-        <p class="fade-text">
-            You don't owe me forgiveness because I apologized.
-        </p>
+    <h2 class="reveal">
+        Maybe the spark<br>
+        didn't disappear.
+    </h2>
 
-        <p class="fade-text">
-            You don't owe me your old warmth because I miss it.
-        </p>
+    <div class="poem reveal">
 
-        <p class="fade-text">
-            You don't owe me the version of you
-            that existed before I hurt you.
-        </p>
+        <p>
+            Perhaps it only folded its little wings
+            after being asked to fly through too much weather.
 
-        <div class="space"></div>
+            Perhaps stars do not die.
+            Perhaps they simply stop introducing themselves
+            to windows that forgot to look up.
 
-        <p class="fade-text highlight">
-            If you're still angry, be angry.
-        </p>
-
-        <p class="fade-text highlight">
-            If you're still hurt, take your time.
-        </p>
-
-        <div class="space"></div>
-
-        <p class="fade-text">
-            I only hope that someday,
-            when my name doesn't hurt anymore,
-            you'll remember that I really did love you.
+            And perhaps a certain idiot
+            finally learned that protecting a flame
+            is considerably wiser than becoming the wind.
         </p>
 
     </div>
 
+</div>
+
 </section>
 
-<!-- =========================
-     SUNRISE
-========================= -->
 
-<section id="sunrise">
+<!-- ========================================================
+     THINGS I NOTICE
+========================================================= -->
 
-    <div class="content">
+<section>
 
-        <div class="sun fade-text"></div>
+<div class="content">
 
-        <div class="eyebrow fade-text">
-            And if you ever smile again...
+    <div class="kicker reveal">
+        things that remained
+    </div>
+
+    <h2 class="reveal">
+        Little things.
+    </h2>
+
+    <p class="reveal">
+        The tiny details that somehow became enormous.
+    </p>
+
+    <div class="cards">
+
+        <div class="glass-card reveal">
+            <div class="card-icon">🌷</div>
+            <h3>Your softness</h3>
+            <p>
+                The world calls it weakness.
+                The world has questionable taste.
+            </p>
         </div>
 
-        <h2 class="fade-text">
-            I hope it's because<br>
-            life finally gave you a reason.
-        </h2>
+        <div class="glass-card reveal">
+            <div class="card-icon">🎨</div>
+            <h3>Your art</h3>
+            <p>
+                Little pieces of you escaping onto paper
+                and pretending they are merely drawings.
+            </p>
+        </div>
 
-        <div class="space"></div>
+        <div class="glass-card reveal">
+            <div class="card-icon">🎶</div>
+            <h3>Your voice</h3>
+            <p>
+                Some sounds do not need an explanation.
+                They simply become places.
+            </p>
+        </div>
 
-        <p class="fade-text">
-            Not because someone convinced you to.
-        </p>
-
-        <div class="space"></div>
-
-        <p class="fade-text">
-            And if I'm lucky enough to be somewhere inside that reason...
-        </p>
-
-        <div class="space"></div>
-
-        <p class="fade-text">
-            I'll consider myself ridiculously blessed.
-        </p>
+        <div class="glass-card reveal">
+            <div class="card-icon">🌙</div>
+            <h3>You</h3>
+            <p>
+                An inconveniently permanent chapter
+                in a brain that was supposed to be sensible.
+            </p>
+        </div>
 
     </div>
 
+</div>
+
 </section>
 
-<!-- =========================
+
+<!-- ========================================================
+     CONSTELLATION 1
+========================================================= -->
+
+<section class="constellation-section">
+
+<div class="content">
+
+    <div class="kicker reveal">
+        constellation I
+    </div>
+
+    <h2 class="reveal">
+        The Almost.
+    </h2>
+
+    <div class="constellation-wrap reveal">
+
+        <div class="constellation-number">
+            01 / THE ALMOST
+        </div>
+
+        <canvas id="constellation1"></canvas>
+
+        <div class="constellation-label">
+            a shape made of things that almost happened
+        </div>
+
+    </div>
+
+    <p class="constellation-poem reveal">
+        Two stars almost touched,
+        so naturally the universe called it complicated.
+        One moved closer,
+        one became afraid,
+        and somewhere between the two,
+        an idiot discovered that regret
+        has excellent memory.
+    </p>
+
+</div>
+
+</section>
+
+
+<!-- ========================================================
+     CONSTELLATION 2
+========================================================= -->
+
+<section class="constellation-section">
+
+<div class="content">
+
+    <div class="kicker reveal">
+        constellation II
+    </div>
+
+    <h2 class="reveal">
+        The Dandelion.
+    </h2>
+
+    <div class="constellation-wrap reveal">
+
+        <div class="constellation-number">
+            02 / THE DANDELION
+        </div>
+
+        <canvas id="constellation2"></canvas>
+
+        <div class="constellation-label">
+            delicate things are not disposable things
+        </div>
+
+    </div>
+
+    <p class="constellation-poem reveal">
+        A dandelion does not ask the wind
+        whether leaving is love.
+        It simply trusts the sky.
+
+        Perhaps that is why it hurts
+        when the wind returns late,
+        carrying an apology
+        it should have learned to say earlier.
+
+        Very poetic.
+        Very unfortunate.
+        Very me.
+    </p>
+
+</div>
+
+</section>
+
+
+<!-- ========================================================
+     CONSTELLATION 3
+========================================================= -->
+
+<section class="constellation-section">
+
+<div class="content">
+
+    <div class="kicker reveal">
+        constellation III
+    </div>
+
+    <h2 class="reveal">
+        The Twin Stars.
+    </h2>
+
+    <div class="constellation-wrap reveal">
+
+        <div class="constellation-number">
+            03 / THE TWIN STARS
+        </div>
+
+        <canvas id="constellation3"></canvas>
+
+        <div class="constellation-label">
+            distance is not always the opposite of closeness
+        </div>
+
+    </div>
+
+    <p class="constellation-poem reveal">
+        Two stars learned the strange mathematics of distance.
+
+        Close enough to recognize each other's light.
+        Far enough to pretend they did not.
+
+        Still,
+        every night one looked for the other.
+
+        Infinity has always been a funny word.
+        It means forever,
+        yet apparently cannot convince one stupid heart
+        to stop waiting.
+    </p>
+
+</div>
+
+</section>
+
+
+<!-- ========================================================
+     CONSTELLATION 4
+========================================================= -->
+
+<section class="constellation-section">
+
+<div class="content">
+
+    <div class="kicker reveal">
+        constellation IV
+    </div>
+
+    <h2 class="reveal">
+        The Endless One.
+    </h2>
+
+    <div class="constellation-wrap reveal">
+
+        <div class="constellation-number">
+            04 / ENDLESS
+        </div>
+
+        <canvas id="constellation4"></canvas>
+
+        <div class="constellation-label">
+            some lines simply refuse to end
+        </div>
+
+    </div>
+
+    <p class="constellation-poem reveal">
+        There are lines that finish.
+
+        There are circles that return.
+
+        And then there are certain feelings,
+        badly designed,
+        terribly stubborn,
+        completely immune to common sense.
+
+        They do not ask for ownership.
+        They do not demand a destination.
+
+        They simply remain.
+
+        Like a star that forgot
+        the universe was supposed to end.
+    </p>
+
+</div>
+
+</section>
+
+
+<!-- ========================================================
+     LETTERS
+========================================================= -->
+
+<section>
+
+<div class="content">
+
+    <div class="kicker reveal">
+        things never said properly
+    </div>
+
+    <h2 class="reveal">
+        Open one.
+    </h2>
+
+    <div class="letters">
+
+        <div class="envelope reveal" data-type="missed">💌</div>
+        <div class="envelope reveal" data-type="fear">✉️</div>
+        <div class="envelope reveal" data-type="regret">💌</div>
+        <div class="envelope reveal" data-type="love">✉️</div>
+        <div class="envelope reveal" data-type="forever">💌</div>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- ========================================================
+     POPUP
+========================================================= -->
+
+<div class="popup" id="popup">
+
+<div class="popup-box">
+
+    <p id="popupText"></p>
+
+    <button class="close" id="close">
+        close gently ♡
+    </button>
+
+</div>
+
+</div>
+
+
+<!-- ========================================================
+     GAME 1
+========================================================= -->
+
+<section class="game-section">
+
+<div class="content">
+
+    <div class="kicker reveal">
+        little intermission
+    </div>
+
+    <h2 class="reveal">
+        Catch some happiness.
+    </h2>
+
+    <p class="reveal">
+        Catch the falling flowers.
+        They have no philosophical agenda.
+        They just want to be caught. 🌷
+    </p>
+
+    <div class="game" id="petalGame">
+
+        <div class="game-title">
+            catch the petals
+        </div>
+
+        <div class="score">
+            flowers: <span id="petalScore">0</span>
+        </div>
+
+    </div>
+
+    <div class="game-hint">
+        tap the petals before they disappear
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- ========================================================
+     GAME 2
+========================================================= -->
+
+<section class="game-section">
+
+<div class="content">
+
+    <div class="kicker reveal">
+        tiny rescue mission
+    </div>
+
+    <h2 class="reveal">
+        Save the heart.
+    </h2>
+
+    <p class="reveal">
+        Apparently even hearts need supervision.
+    </p>
+
+    <div class="game" id="heartGame">
+
+        <div class="game-title">
+            protect the little heart
+        </div>
+
+        <div class="score">
+            saved: <span id="heartScore">0</span>
+        </div>
+
+        <div class="heart-player" id="heartPlayer">
+            💗
+        </div>
+
+    </div>
+
+    <div class="game-hint">
+        move the heart left and right to avoid the falling stars
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- ========================================================
+     GAME 3 GARDEN
+========================================================= -->
+
+<section class="game-section">
+
+<div class="content">
+
+    <div class="kicker reveal">
+        a quieter game
+    </div>
+
+    <h2 class="reveal">
+        Grow a little garden.
+    </h2>
+
+    <p class="reveal">
+        Click anywhere on the soil.
+        Let something gentle exist here.
+    </p>
+
+    <div class="garden" id="garden">
+
+        <div class="moon"></div>
+
+        <div class="seed" id="seed">
+            🌱
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- ========================================================
      FINAL
-========================= -->
+========================================================= -->
 
-<section id="final">
+<section class="final">
 
-    <div class="content">
+<div class="content">
 
-        <div class="eyebrow fade-text">
-            No grand promise
-        </div>
+    <div class="kicker reveal">
+        no grand promise
+    </div>
 
-        <div class="final-name fade-text">
-            Ria
-        </div>
+    <div class="final-name reveal">
+        Ria
+    </div>
 
-        <div class="final-heart fade-text">
-            ♡
-        </div>
+    <div class="final-poem reveal">
 
-        <p class="final-line fade-text">
-            No dramatic ending.
+        <p>
+            Maybe the universe has a sense of humour.
+
+            It gave one heart
+            an infinite amount of feeling
+            and approximately zero useful instructions.
         </p>
 
-        <p class="final-line fade-text">
-            Just one stupid boy standing outside the ruins
-            of something beautiful...
+        <br>
+
+        <p>
+            So yes,
+            somewhere inside all this poetry
+            there is still a very stupid boy
+            who regrets leaving,
+            remembers everything,
+            and somehow continues to love
+            with the confidence of someone
+            who clearly never learned moderation.
         </p>
 
-        <p class="final-line fade-text">
-            holding the pieces he should've protected
-            in the first place.
+        <br>
+
+        <p>
+            You don't have to forgive me today.
+
+            You don't have to become
+            who you were before.
+
+            You don't owe me anything.
         </p>
 
-        <div class="space"></div>
+        <br>
 
-        <h2 class="fade-text">
-            I'm sorry.
-        </h2>
+        <p>
+            Just be gentle with yourself.
 
-        <div class="space"></div>
-
-        <h2 class="fade-text">
-            I love you.
-        </h2>
-
-        <div class="space"></div>
-
-        <p class="final-line fade-text">
-            And whenever you're ready...
+            Let your light return
+            at its own pace.
         </p>
 
-        <div class="signature fade-text">
-            Maybe the spark was never gone. 🌷
-        </div>
+        <br>
+
+        <p>
+            And if one tiny corner of that light
+            ever reaches me again...
+
+            I'll be grateful.
+
+            Not because it belongs to me.
+
+            But because it exists.
+        </p>
 
     </div>
 
+    <h2 class="reveal">
+        I'm sorry.
+    </h2>
+
+    <div class="spacer"></div>
+
+    <h2 class="reveal">
+        I love you.
+    </h2>
+
+    <div class="signature reveal">
+        Maybe the spark was never gone. 🌷
+    </div>
+
+</div>
+
 </section>
+
 
 <script>
 
-/* =========================
-   CREATE STARS
-========================= */
+/* =========================================================
+   SECRET ENTRY + MUSIC
+========================================================= */
 
-const starsContainer = document.getElementById("stars");
+const entry=document.getElementById("entry");
+const entryCard=document.getElementById("entryCard");
+const secret=document.getElementById("secret");
+const enter=document.getElementById("enter");
+const error=document.getElementById("error");
 
-for (let i = 0; i < 130; i++) {
+const song=document.getElementById("song");
+const music=document.getElementById("music");
 
-    const star = document.createElement("div");
+function startMusic(){
 
-    star.className = "star";
+    song.volume=0;
 
-    star.style.left = Math.random() * 100 + "%";
-    star.style.top = Math.random() * 100 + "%";
+    const promise=song.play();
 
-    star.style.animationDelay =
-        Math.random() * 3 + "s";
+    if(promise!==undefined){
 
-    star.style.opacity =
-        0.2 + Math.random() * 0.6;
+        promise.then(()=>{
 
-    starsContainer.appendChild(star);
-}
+            music.classList.add("show");
 
-/* =========================
-   ELEMENTS
-========================= */
+            let v=0;
 
-const entry = document.getElementById("entry");
-const entryBox = document.getElementById("entryBox");
-const input = document.getElementById("secretInput");
-const enterBtn = document.getElementById("enterBtn");
-const error = document.getElementById("error");
+            const fade=setInterval(()=>{
 
-const song = document.getElementById("song");
-const musicBtn = document.getElementById("musicBtn");
+                v+=.025;
 
-/* =========================
-   MUSIC
-========================= */
+                if(v>=.65){
+                    v=.65;
+                    clearInterval(fade);
+                }
 
-let musicPlaying = false;
+                song.volume=v;
 
-function startMusic() {
+            },80);
 
-    song.volume = 0;
+        }).catch(()=>{
 
-    const playPromise = song.play();
+            music.classList.add("show");
 
-    if (playPromise !== undefined) {
-
-        playPromise
-            .then(() => {
-
-                musicPlaying = true;
-
-                musicBtn.classList.add("visible");
-                musicBtn.textContent = "🎵";
-
-                let volume = 0;
-
-                const fade = setInterval(() => {
-
-                    if (volume >= 0.65) {
-
-                        clearInterval(fade);
-                        return;
-
-                    }
-
-                    volume += 0.025;
-                    song.volume = volume;
-
-                }, 100);
-
-            })
-            .catch(() => {
-
-                musicBtn.classList.add("visible");
-                musicBtn.textContent = "▶️";
-
-            });
-
+        });
     }
 }
 
-musicBtn.addEventListener("click", () => {
+function verify(){
 
-    if (song.paused) {
+    const value=secret.value.trim().toLowerCase();
 
-        song.play();
-
-        musicPlaying = true;
-        musicBtn.textContent = "🎵";
-
-    } else {
-
-        song.pause();
-
-        musicPlaying = false;
-        musicBtn.textContent = "🔇";
-
-    }
-
-});
-
-/* =========================
-   SECRET PASSWORD
-========================= */
-
-function checkSecret() {
-
-    const answer = input.value.trim().toLowerCase();
-
-    if (answer === "mendarua") {
+    if(value==="mendarua"){
 
         error.classList.remove("show");
 
-        enterBtn.textContent = "♡";
+        enter.innerHTML="♡";
 
         startMusic();
 
-        setTimeout(() => {
+        entryCard.style.transform="scale(1.04)";
+
+        setTimeout(()=>{
 
             entry.classList.add("hide");
+            document.body.classList.remove("locked");
 
-            document.body.style.overflowY = "auto";
-
-            setTimeout(() => {
+            setTimeout(()=>{
 
                 document
-                    .getElementById("beginning")
-                    .scrollIntoView({
-                        behavior: "smooth"
+                    .querySelectorAll("section:first-of-type .reveal")
+                    .forEach((el,i)=>{
+
+                        setTimeout(()=>{
+                            el.classList.add("visible");
+                        },i*350);
+
                     });
 
-                revealVisible();
+            },800);
 
-            }, 700);
+        },650);
 
-        }, 800);
+    }else{
 
-    } else {
+        error.textContent=[
+            "Hmm... the frog disagrees. 🐸",
+            "The little frog remembers better than that. 🐸",
+            "Suspicious. Very suspicious. 🐸",
+            "You know this one. Come on. 🐸"
+        ][Math.floor(Math.random()*4)];
 
         error.classList.add("show");
 
-        entryBox.classList.remove("shake");
+        entryCard.classList.remove("shake");
+        void entryCard.offsetWidth;
+        entryCard.classList.add("shake");
 
-        void entryBox.offsetWidth;
-
-        entryBox.classList.add("shake");
-
-        input.value = "";
-        input.focus();
-
-        const messages = [
-            "Hmm... that doesn't sound like you. 🐸",
-            "The frog says nope. 🐸",
-            "Almost suspicious... try again. 🐸",
-            "You know this one. I know you do. 🐸"
-        ];
-
-        error.textContent =
-            messages[Math.floor(Math.random() * messages.length)];
-
+        secret.value="";
+        secret.focus();
     }
 }
 
-enterBtn.addEventListener("click", checkSecret);
+enter.addEventListener("click",verify);
 
-input.addEventListener("keydown", (event) => {
+secret.addEventListener("keydown",e=>{
+    if(e.key==="Enter") verify();
+});
 
-    if (event.key === "Enter") {
-        checkSecret();
+music.addEventListener("click",()=>{
+
+    if(song.paused){
+
+        song.play();
+        music.textContent="🎵";
+
+    }else{
+
+        song.pause();
+        music.textContent="🔇";
+
     }
 
 });
 
-/* =========================
-   INITIAL SCROLL LOCK
-========================= */
 
-document.body.style.overflow = "hidden";
+/* =========================================================
+   SCROLL REVEALS
+========================================================= */
 
-/* =========================
-   SCROLL REVEAL
-========================= */
+const observer=new IntersectionObserver(entries=>{
 
-function revealVisible() {
+    entries.forEach(entry=>{
 
-    const elements =
-        document.querySelectorAll(".fade-text");
+        if(entry.isIntersecting){
 
-    elements.forEach(element => {
-
-        const rect =
-            element.getBoundingClientRect();
-
-        if (
-            rect.top < window.innerHeight * .88 &&
-            rect.bottom > 0
-        ) {
-
-            element.classList.add("show");
+            entry.target.classList.add("visible");
 
         }
 
     });
 
-}
+},{
+    threshold:.12
+});
 
-window.addEventListener("scroll", revealVisible);
+document.querySelectorAll(".reveal")
+.forEach(el=>observer.observe(el));
 
-window.addEventListener("load", () => {
 
-    setTimeout(() => {
+/* =========================================================
+   LETTERS
+========================================================= */
 
-        document
-            .querySelectorAll("#beginning .fade-text")
-            .forEach((element, index) => {
+const letters={
 
-                setTimeout(() => {
-                    element.classList.add("show");
-                }, index * 450);
+    missed:
+    `I missed you.
 
-            });
+    The annoying kind of missing.
+    The kind that sits quietly in ordinary moments
+    and suddenly makes everything look slightly incomplete.`,
 
-    }, 400);
+    fear:
+    `I was afraid.
+
+    And apparently my brilliant solution
+    to fear was to create the exact thing
+    I was afraid of.
+
+    Genius.
+    Absolutely award-winning behaviour.`,
+
+    regret:
+    `Regret is strange.
+
+    It does not shout.
+    It simply remembers.
+
+    And unfortunately,
+    my memory has decided
+    that forgetting you is not an available feature.`,
+
+    love:
+    `I still love you.
+
+    Not as a demand.
+    Not as a debt.
+
+    Just as a stubborn little truth
+    that survived every attempt
+    I made to make it behave.`,
+
+    forever:
+    `Forever is an arrogant word.
+
+    So I won't promise you forever.
+
+    I'll simply admit
+    that every version of tomorrow
+    somehow keeps finding a little place
+    where you exist.`
+};
+
+const popup=document.getElementById("popup");
+const popupText=document.getElementById("popupText");
+
+document.querySelectorAll(".envelope")
+.forEach(envelope=>{
+
+    envelope.addEventListener("click",()=>{
+
+        popupText.textContent=
+            letters[envelope.dataset.type];
+
+        popup.classList.add("active");
+
+    });
 
 });
 
-/* =========================
-   LETTER SYSTEM
-========================= */
+document.getElementById("close")
+.addEventListener("click",()=>{
+    popup.classList.remove("active");
+});
 
-const letterTexts = {
+popup.addEventListener("click",e=>{
+    if(e.target===popup)
+        popup.classList.remove("active");
+});
 
-    missed:
-        "I missed you. More than I knew how to admit.",
 
-    scared:
-        "I was scared. So I ran when I should've stayed.",
+/* =========================================================
+   CONSTELLATIONS
+========================================================= */
 
-    regret:
-        "I regret it. Not because I lost something that belonged to me, but because I hurt someone who never deserved it.",
+function createConstellation(id,type){
 
-    care:
-        "I still care. Unfortunately for my dignity, that part never learned how to leave."
+    const canvas=document.getElementById(id);
+    const box=canvas.parentElement;
 
-};
+    const ctx=canvas.getContext("2d");
 
-const letterPopup =
-    document.getElementById("letterPopup");
+    function resize(){
 
-const letterText =
-    document.getElementById("letterText");
+        const dpr=window.devicePixelRatio||1;
 
-const closeLetter =
-    document.getElementById("closeLetter");
+        canvas.width=box.clientWidth*dpr;
+        canvas.height=box.clientHeight*dpr;
 
-document
-    .querySelectorAll(".envelope")
-    .forEach(envelope => {
+        ctx.setTransform(dpr,0,0,dpr,0,0);
 
-        envelope.addEventListener("click", () => {
+    }
 
-            const type =
-                envelope.dataset.letter;
+    resize();
+    window.addEventListener("resize",resize);
 
-            letterText.textContent =
-                letterTexts[type];
+    let points=[];
 
-            letterPopup.classList.add("active");
+    const patterns={
 
+        heart:[
+            [.50,.16],
+            [.30,.08],
+            [.17,.22],
+            [.20,.45],
+            [.34,.68],
+            [.50,.87],
+            [.66,.68],
+            [.80,.45],
+            [.83,.22],
+            [.70,.08],
+            [.50,.16]
+        ],
+
+        flower:[
+            [.50,.12],
+            [.72,.25],
+            [.82,.48],
+            [.68,.70],
+            [.50,.84],
+            [.32,.70],
+            [.18,.48],
+            [.28,.25],
+            [.50,.12],
+            [.50,.48]
+        ],
+
+        infinity:[
+            [.18,.38],
+            [.30,.22],
+            [.46,.24],
+            [.55,.50],
+            [.70,.76],
+            [.84,.62],
+            [.82,.40],
+            [.70,.23],
+            [.55,.25],
+            [.44,.50],
+            [.30,.76],
+            [.16,.62],
+            [.18,.38]
+        ],
+
+        moon:[
+            [.32,.16],
+            [.20,.30],
+            [.18,.50],
+            [.26,.70],
+            [.43,.82],
+            [.62,.78],
+            [.75,.64],
+            [.80,.47],
+            [.74,.30],
+            [.60,.20],
+            [.46,.16]
+        ]
+
+    };
+
+    const normalized=patterns[type];
+
+    normalized.forEach((p,i)=>{
+
+        points.push({
+            x:p[0]*box.clientWidth,
+            y:p[1]*box.clientHeight,
+            progress:0,
+            delay:i*.12
         });
 
     });
 
-closeLetter.addEventListener("click", () => {
+    function draw(){
 
-    letterPopup.classList.remove("active");
+        ctx.clearRect(0,0,box.clientWidth,box.clientHeight);
 
-});
+        const rect=box.getBoundingClientRect();
 
-letterPopup.addEventListener("click", (event) => {
+        const viewport=window.innerHeight;
 
-    if (event.target === letterPopup) {
+        let progress=
+            1-(rect.top-viewport*.65)/(viewport*.9);
 
-        letterPopup.classList.remove("active");
+        progress=Math.max(0,Math.min(1,progress));
 
+        /* stars */
+
+        points.forEach((p,i)=>{
+
+            const local=
+                Math.max(
+                    0,
+                    Math.min(
+                        1,
+                        (progress-p.delay)/.55
+                    )
+                );
+
+            p.progress=local;
+
+            if(local>0){
+
+                ctx.beginPath();
+
+                ctx.arc(
+                    p.x,
+                    p.y,
+                    3.2+local*2,
+                    0,
+                    Math.PI*2
+                );
+
+                ctx.fillStyle=
+                    `rgba(157,93,117,${local})`;
+
+                ctx.shadowBlur=16;
+                ctx.shadowColor="rgba(210,112,145,.55)";
+
+                ctx.fill();
+
+                ctx.shadowBlur=0;
+            }
+
+        });
+
+        /* connecting lines */
+
+        for(let i=1;i<points.length;i++){
+
+            const a=points[i-1];
+            const b=points[i];
+
+            const lineProgress=
+                Math.min(a.progress,b.progress);
+
+            if(lineProgress>0){
+
+                ctx.beginPath();
+
+                ctx.moveTo(a.x,a.y);
+
+                const x=
+                    a.x+(b.x-a.x)*lineProgress;
+
+                const y=
+                    a.y+(b.y-a.y)*lineProgress;
+
+                ctx.lineTo(x,y);
+
+                ctx.strokeStyle=
+                    `rgba(160,96,119,${lineProgress*.45})`;
+
+                ctx.lineWidth=1.2;
+
+                ctx.stroke();
+            }
+
+        }
+
+        requestAnimationFrame(draw);
     }
 
+    draw();
+}
+
+createConstellation("constellation1","heart");
+createConstellation("constellation2","flower");
+createConstellation("constellation3","infinity");
+createConstellation("constellation4","moon");
+
+
+/* =========================================================
+   GAME 1
+   CATCH PETALS
+========================================================= */
+
+const petalGame=document.getElementById("petalGame");
+const petalScore=document.getElementById("petalScore");
+
+let petals=0;
+
+function spawnPetal(){
+
+    if(!document.body.contains(petalGame)) return;
+
+    const petal=document.createElement("div");
+
+    petal.className="petal";
+
+    petal.textContent=
+        ["🌷","🌸","🌹","🌺","💮"]
+        [Math.floor(Math.random()*5)];
+
+    petal.style.left=
+        (5+Math.random()*90)+"%";
+
+    const duration=
+        4+Math.random()*3;
+
+    petal.style.animationDuration=
+        duration+"s";
+
+    petalGame.appendChild(petal);
+
+    petal.addEventListener("pointerdown",e=>{
+
+        e.stopPropagation();
+
+        petals++;
+
+        petalScore.textContent=petals;
+
+        petal.animate([
+            {transform:"scale(1)",opacity:1},
+            {transform:"scale(2) rotate(180deg)",opacity:0}
+        ],{
+            duration:350,
+            easing:"ease-out"
+        });
+
+        setTimeout(()=>petal.remove(),330);
+
+    });
+
+    setTimeout(()=>{
+
+        if(petal.isConnected)
+            petal.remove();
+
+    },duration*1000);
+
+}
+
+setInterval(spawnPetal,900);
+
+
+/* =========================================================
+   GAME 2
+   SAVE HEART
+========================================================= */
+
+const heartGame=document.getElementById("heartGame");
+const heartPlayer=document.getElementById("heartPlayer");
+const heartScore=document.getElementById("heartScore");
+
+let saved=0;
+let heartX=50;
+
+function moveHeart(x){
+
+    const rect=heartGame.getBoundingClientRect();
+
+    let percent=
+        ((x-rect.left)/rect.width)*100;
+
+    percent=Math.max(7,Math.min(93,percent));
+
+    heartX=percent;
+
+    heartPlayer.style.left=percent+"%";
+}
+
+heartGame.addEventListener("pointermove",e=>{
+    if(e.pointerType==="mouse")
+        moveHeart(e.clientX);
 });
 
-/* =========================
-   ESCAPE POPUP
-========================= */
+heartGame.addEventListener("pointerdown",e=>{
+    moveHeart(e.clientX);
+});
 
-document.addEventListener("keydown", (event) => {
+function fallingStar(){
 
-    if (event.key === "Escape") {
+    const star=document.createElement("div");
 
-        letterPopup.classList.remove("active");
+    star.className="falling-star";
+    star.textContent="⭐";
 
-    }
+    star.style.left=
+        (5+Math.random()*90)+"%";
+
+    const duration=
+        2.2+Math.random()*1.8;
+
+    star.style.animationDuration=
+        duration+"s";
+
+    heartGame.appendChild(star);
+
+    const timer=setInterval(()=>{
+
+        const s=star.getBoundingClientRect();
+        const h=heartPlayer.getBoundingClientRect();
+
+        const hit=
+            s.left<h.right &&
+            s.right>h.left &&
+            s.top<h.bottom &&
+            s.bottom>h.top;
+
+        if(hit){
+
+            clearInterval(timer);
+
+            saved++;
+
+            heartScore.textContent=saved;
+
+            star.animate([
+                {transform:"scale(1)",opacity:1},
+                {transform:"scale(2)",opacity:0}
+            ],{
+                duration:300
+            });
+
+            setTimeout(()=>star.remove(),280);
+
+        }
+
+    },30);
+
+    setTimeout(()=>{
+
+        clearInterval(timer);
+
+        if(star.isConnected)
+            star.remove();
+
+    },duration*1000);
+
+}
+
+setInterval(fallingStar,850);
+
+
+/* =========================================================
+   GAME 3
+   MOON GARDEN
+========================================================= */
+
+const garden=document.getElementById("garden");
+
+garden.addEventListener("pointerdown",e=>{
+
+    if(e.target.closest(".moon"))
+        return;
+
+    const rect=garden.getBoundingClientRect();
+
+    const flower=document.createElement("div");
+
+    flower.className="grown";
+
+    flower.textContent=
+        ["🌷","🌸","🌹","🌻","🌺","🪻"]
+        [Math.floor(Math.random()*6)];
+
+    flower.style.left=
+        (8+
+        Math.random()*84)+"%";
+
+    flower.style.bottom=
+        (20+
+        Math.random()*30)+"px";
+
+    garden.appendChild(flower);
+
+    setTimeout(()=>{
+
+        flower.style.transform="translateY(-8px)";
+
+    },500);
 
 });
 
-/* =========================
-   FINAL REVEAL CHECK
-========================= */
 
-setInterval(revealVisible, 300);
+/* =========================================================
+   SMALL PARALLAX
+========================================================= */
+
+window.addEventListener("scroll",()=>{
+
+    const y=window.scrollY;
+
+    document.querySelectorAll(".blob")
+    .forEach((blob,i)=>{
+
+        blob.style.transform=
+            `translate3d(0,${y*(i+1)*.015}px,0)`;
+
+    });
+
+});
 
 </script>
 
