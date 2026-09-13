@@ -122,6 +122,18 @@ body.locked{
     background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
+button,
+input{
+    font:inherit;
+}
+
+button:focus-visible,
+input:focus-visible,
+.envelope:focus-visible{
+    outline:3px solid rgba(170,83,116,.55);
+    outline-offset:4px;
+}
+
 /* =========================================================
    ENTRY
 ========================================================= */
@@ -971,6 +983,20 @@ p{
         height:110px;
     }
 }
+
+@media(prefers-reduced-motion:reduce){
+    html{
+        scroll-behavior:auto;
+    }
+
+    *,
+    *::before,
+    *::after{
+        animation-duration:.01ms !important;
+        animation-iteration-count:1 !important;
+        transition-duration:.01ms !important;
+    }
+}
 </style>
 </head>
 
@@ -986,7 +1012,7 @@ p{
 
 <audio id="song" src="song.mp3" loop preload="auto"></audio>
 
-<button class="music" id="music">🎵</button>
+<button class="music" id="music" type="button" aria-label="Pause music">🎵</button>
 
 <!-- ========================================================
      SECRET ENTRY
@@ -1021,13 +1047,13 @@ p{
 
             <input
                 id="secret"
-                type="text"
+                type="password"
                 placeholder="enter the secret"
                 autocomplete="off"
                 spellcheck="false"
             >
 
-            <button class="enter" id="enter">
+            <button class="enter" id="enter" type="button" aria-label="Unlock the page">
                 ♡
             </button>
 
@@ -1467,11 +1493,11 @@ p{
 
     <div class="letters">
 
-        <div class="envelope reveal" data-type="missed">💌</div>
-        <div class="envelope reveal" data-type="fear">✉️</div>
-        <div class="envelope reveal" data-type="regret">💌</div>
-        <div class="envelope reveal" data-type="love">✉️</div>
-        <div class="envelope reveal" data-type="forever">💌</div>
+        <button class="envelope reveal" type="button" data-type="missed" aria-label="Open the missed you letter">💌</button>
+        <button class="envelope reveal" type="button" data-type="fear" aria-label="Open the fear letter">✉️</button>
+        <button class="envelope reveal" type="button" data-type="regret" aria-label="Open the regret letter">💌</button>
+        <button class="envelope reveal" type="button" data-type="love" aria-label="Open the love letter">✉️</button>
+        <button class="envelope reveal" type="button" data-type="forever" aria-label="Open the forever letter">💌</button>
 
     </div>
 
@@ -1484,13 +1510,13 @@ p{
      POPUP
 ========================================================= -->
 
-<div class="popup" id="popup">
+<div class="popup" id="popup" role="dialog" aria-modal="true" aria-labelledby="popupText">
 
 <div class="popup-box">
 
     <p id="popupText"></p>
 
-    <button class="close" id="close">
+    <button class="close" id="close" type="button">
         close gently ♡
     </button>
 
@@ -1777,6 +1803,7 @@ function verify(){
         enter.innerHTML="♡";
 
         startMusic();
+        startGames();
 
         entryCard.style.transform="scale(1.04)";
 
@@ -1833,11 +1860,13 @@ music.addEventListener("click",()=>{
 
         song.play();
         music.textContent="🎵";
+        music.setAttribute("aria-label","Pause music");
 
     }else{
 
         song.pause();
         music.textContent="🔇";
+        music.setAttribute("aria-label","Play music");
 
     }
 
@@ -1944,6 +1973,12 @@ document.getElementById("close")
     popup.classList.remove("active");
 });
 
+document.addEventListener("keydown",e=>{
+    if(e.key==="Escape" && popup.classList.contains("active")){
+        popup.classList.remove("active");
+    }
+});
+
 popup.addEventListener("click",e=>{
     if(e.target===popup)
         popup.classList.remove("active");
@@ -1961,21 +1996,36 @@ function createConstellation(id,type){
 
     const ctx=canvas.getContext("2d");
 
+    let points=[];
+    let previousWidth=0;
+    let previousHeight=0;
+
     function resize(){
 
         const dpr=window.devicePixelRatio||1;
 
-        canvas.width=box.clientWidth*dpr;
-        canvas.height=box.clientHeight*dpr;
+        const width=box.clientWidth;
+        const height=box.clientHeight;
+
+        if(previousWidth && previousHeight){
+            points.forEach(point=>{
+                point.x*=width/previousWidth;
+                point.y*=height/previousHeight;
+            });
+        }
+
+        canvas.width=width*dpr;
+        canvas.height=height*dpr;
 
         ctx.setTransform(dpr,0,0,dpr,0,0);
+
+        previousWidth=width;
+        previousHeight=height;
 
     }
 
     resize();
     window.addEventListener("resize",resize);
-
-    let points=[];
 
     const patterns={
 
@@ -2159,10 +2209,13 @@ const petalGame=document.getElementById("petalGame");
 const petalScore=document.getElementById("petalScore");
 
 let petals=0;
+let gamesStarted=false;
+let petalTimer;
+let heartTimer;
 
 function spawnPetal(){
 
-    if(!document.body.contains(petalGame)) return;
+    if(!gamesStarted || !document.body.contains(petalGame)) return;
 
     const petal=document.createElement("div");
 
@@ -2212,9 +2265,6 @@ function spawnPetal(){
 
 }
 
-setInterval(spawnPetal,900);
-
-
 /* =========================================================
    GAME 2
    SAVE HEART
@@ -2251,6 +2301,8 @@ heartGame.addEventListener("pointerdown",e=>{
 });
 
 function fallingStar(){
+
+    if(!gamesStarted) return;
 
     const star=document.createElement("div");
 
@@ -2311,7 +2363,14 @@ function fallingStar(){
 
 }
 
-setInterval(fallingStar,850);
+function startGames(){
+
+    if(gamesStarted) return;
+
+    gamesStarted=true;
+    petalTimer=setInterval(spawnPetal,900);
+    heartTimer=setInterval(fallingStar,850);
+}
 
 
 /* =========================================================
